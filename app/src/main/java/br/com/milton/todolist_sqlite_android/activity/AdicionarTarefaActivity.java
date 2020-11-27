@@ -1,8 +1,10 @@
-package br.com.milton.todolist_sqlite_android;
+package br.com.milton.todolist_sqlite_android.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import br.com.milton.todolist_sqlite_android.R;
 
 public class AdicionarTarefaActivity extends AppCompatActivity {
 

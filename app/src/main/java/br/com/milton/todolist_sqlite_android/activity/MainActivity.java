@@ -1,25 +1,41 @@
-package br.com.milton.todolist_sqlite_android;
+package br.com.milton.todolist_sqlite_android.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.milton.todolist_sqlite_android.R;
+import br.com.milton.todolist_sqlite_android.adapter.TarefaAdapter;
+import br.com.milton.todolist_sqlite_android.model.Tarefa;
 
 public class MainActivity extends AppCompatActivity {
+
+    RecyclerView recyclerView;
+    private TarefaAdapter tarefaAdapter;
+    private List<Tarefa> listaTarefas = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        recyclerView = findViewById(R.id.recyclerView);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -31,6 +47,33 @@ public class MainActivity extends AppCompatActivity {
                 startActivity( intent );
             }
         });
+    }
+
+    public void carregarListaDeTarefas(){
+        // listar tarefas
+        Tarefa tarefa1 = new Tarefa();
+        tarefa1.setNomeTarefa("Ir ao mercado");
+        listaTarefas.add(tarefa1);
+
+        Tarefa tarefa2 = new Tarefa();
+        tarefa2.setNomeTarefa("Ir a feira");
+        listaTarefas.add(tarefa2);
+
+        // configurar adapter
+        tarefaAdapter = new TarefaAdapter( listaTarefas );
+
+        // configurar recyclerview
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager( getApplicationContext() );
+        recyclerView.setLayoutManager( layoutManager );
+        recyclerView.setHasFixedSize( true );
+        recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
+        recyclerView.setAdapter( tarefaAdapter );
+    }
+
+    @Override
+    protected void onStart() {
+        carregarListaDeTarefas();
+        super.onStart();
     }
 
     @Override
