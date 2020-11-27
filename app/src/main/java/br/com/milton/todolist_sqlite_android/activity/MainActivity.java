@@ -29,6 +29,7 @@ import br.com.milton.todolist_sqlite_android.R;
 import br.com.milton.todolist_sqlite_android.adapter.TarefaAdapter;
 import br.com.milton.todolist_sqlite_android.helper.DbHelper;
 import br.com.milton.todolist_sqlite_android.helper.RecyclerItemClickListener;
+import br.com.milton.todolist_sqlite_android.helper.TarefaDAO;
 import br.com.milton.todolist_sqlite_android.model.Tarefa;
 
 public class MainActivity extends AppCompatActivity {
@@ -80,13 +81,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void carregarListaDeTarefas(){
         // listar tarefas
-        Tarefa tarefa1 = new Tarefa();
-        tarefa1.setNomeTarefa("Ir ao mercado");
-        listaTarefas.add(tarefa1);
-
-        Tarefa tarefa2 = new Tarefa();
-        tarefa2.setNomeTarefa("Ir a feira");
-        listaTarefas.add(tarefa2);
+        TarefaDAO tarefaDAO = new TarefaDAO( getApplicationContext() );
+        listaTarefas = tarefaDAO.listar();
 
         // configurar adapter
         tarefaAdapter = new TarefaAdapter( listaTarefas );
