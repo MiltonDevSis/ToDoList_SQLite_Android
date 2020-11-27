@@ -8,14 +8,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
 import br.com.milton.todolist_sqlite_android.R;
+import br.com.milton.todolist_sqlite_android.helper.TarefaDAO;
+import br.com.milton.todolist_sqlite_android.model.Tarefa;
 
 public class AdicionarTarefaActivity extends AppCompatActivity {
+
+    private TextInputEditText txtTarefa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_tarefa);
+
+        txtTarefa = findViewById(R.id.txtTarefas);
     }
 
     @Override
@@ -29,8 +38,11 @@ public class AdicionarTarefaActivity extends AppCompatActivity {
         switch ( item.getItemId() ){
 
             case R.id.itemSalvar:
-                Toast.makeText(AdicionarTarefaActivity.this, "Salvo", Toast.LENGTH_LONG).show();
-                break;
+                TarefaDAO tarefaDAO = new TarefaDAO( getApplicationContext() );
+
+                Tarefa tarefa = new Tarefa();
+                tarefa.setNomeTarefa("Ir ao mercado");
+                tarefaDAO.salvar(tarefa);
         }
         return super.onOptionsItemSelected(item);
     }

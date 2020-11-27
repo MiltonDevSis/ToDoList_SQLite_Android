@@ -17,6 +17,9 @@ public class DbHelper extends SQLiteOpenHelper {
         super(context, NOME_DB, null, VERSION);
     }
 
+    // metodos são chamados somente na primeira vez que executa o app
+    // o update é chamado toda vez que muda a versao da DB
+
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -40,10 +43,9 @@ public class DbHelper extends SQLiteOpenHelper {
         try {
             db.execSQL( sql );
             onCreate( db );
-            Log.i("Info DB", "Sucesso ao deletar tabela");
+            Log.i("Info DB", "Sucesso ao atualizar o app");
         }catch (Exception e){
-            Log.i("Info DB", "Erro ao deletar" + e.getMessage());
+            Log.i("Info DB", "Erro ao atualizar o app" + e.getMessage());
         }
-
     }
 }

@@ -1,5 +1,6 @@
 package br.com.milton.todolist_sqlite_android.activity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -26,6 +27,7 @@ import java.util.List;
 
 import br.com.milton.todolist_sqlite_android.R;
 import br.com.milton.todolist_sqlite_android.adapter.TarefaAdapter;
+import br.com.milton.todolist_sqlite_android.helper.DbHelper;
 import br.com.milton.todolist_sqlite_android.helper.RecyclerItemClickListener;
 import br.com.milton.todolist_sqlite_android.model.Tarefa;
 
